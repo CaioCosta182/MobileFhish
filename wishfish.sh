@@ -1,20 +1,16 @@
-#!/bin/bash
-# Powered by kinghacker0
-# Credits goes to thelinuxchoice [github.com/thelinuxchoice/]
 
 trap 'printf "\n";stop' 2
 
 banner() {
 clear
-echo -e "\033[31m __          _ _     _     \e[0m ______ _     _          ";
-echo -e "\033[31m \ \        / (_)   | |    \e[0m|  ____(_)   | |         ";
-echo -e "\033[31m  \ \  /\  / / _ ___| | __ \e[0m| |__   _ ___| |__       ";
-echo -e "\033[31m   \ \/  \/ / | / __| '_  |\e[0m|  __| | / __| '_ \      ";
-echo -e "\033[31m    \  /\  /  | \__ \ | | |\e[0m| |    | \__ \ | | |     ";
-echo -e "\033[31m     \/  \/   |_|___/_| |_|\e[0m|_|    |_|___/_| |_| v3.0";
+echo -e "\033[31m  __  __     \e[0m ______ _     _          ";
+echo -e "\033[31m |  \/  |    \e[0m|  ____(_)   | |         ";
+echo -e "\033[31m | \  / |    \e[0m| |__   _ ___| |__       ";
+echo -e "\033[31m | |\/| |    \e[0m|  __| | / __| '_ \      ";
+echo -e "\033[31m | |  | |    \e[0m| |    | \__ \ | | |     ";
+echo -e "\033[31m |_|  |_|    \e[0m|_|    |_|___/_| |_| v1.5";
+}
 
-printf " \e[1;93m WishFish v3.0\e[0m \n"
-printf " \e[1;77m www.hackersking.in | youtube.com/mohitsaran0 \e[0m \n"
 
 printf "\n"
 

@@ -1,33 +1,32 @@
-![alt text](https://github.com/kinghacker0/WishFish/blob/master/WishFish.png)
-<h1>WishFish v3.0</h1>                                                 
-<p>Using WishFish tool you can generat different phishing links of wishing or custom sites which can grab victim front camera pictures and also gives you lockup information of target ip address.
-<p1>
- 
- <h3 style="text-align: left;"><span style="font-family: arial;">Bug Fixes &amp; New Features Added</span></h3><div><ul style="text-align: left;"><li><span style="font-family: arial;">Ngrok Tunnel Error Fixed</span></li><li><span style="font-family: arial;">Sub-Domain Added</span></li><li><span style="font-family: arial;">Live-Meeting Page Added</span></li><li><span style="font-family: arial;">Live YouTube Page Added(Custom)</span></li><li><span style="font-family: arial;">Festival Wishing Page Added(Custom)</span></li></ul>
+🎣 MobileFish v1.5
 
- 
-<h3 style="text-align: left;"><span style="font-family: arial;">Installation & Usage</h3>
+Usando a ferramenta MobileFish, você pode gerar diferentes links de phishing para sites de desejos (wishing) ou sites personalizados que podem capturar fotos da câmera frontal da vítima e também fornecer informações de look-up (localização aproximada) do endereço IP do alvo.
 
-```bash 
-git clone https://github.com/kinghacker0/WishFish
-cd WishFish && bash wishfish.sh 
-```
- 
-Note: Now turn your device hotspot before using it
+🛠️ Correções de Bugs e Novos Recursos Adicionados
+Erro de túnel Ngrok corrigido
 
-<p>Sometimes servero server is down so always go with ngrok for instant link and wait until it generates url for then send it to victim.
-</p>
- Our Website :-www.hackersking.in
-<h4>Note :- If victim open this url in chrome or android inbuilt browser then it can access victim camera by allowing permissions and send snap to you.
-</h4>
+Sub-Domínio Adicionado
 
->The captured images will be stored in captured folder. Run the following script to copy it to pictures folder
+Página de Reunião ao Vivo (Live-Meeting) Adicionada
 
-```bash
+Página do YouTube ao Vivo Adicionada (Personalizada)
+
+Página de Desejos de Festival Adicionada (Personalizada)
+
+💻 Instalação e Uso
+
+git clone git@github.com:CaioCosta182/FishWish.git
+cd WishFish && bash wishfish.sh
+
+Nota: Agora, ligue o ponto de acesso (hotspot) do seu dispositivo antes de usá-lo.
+
+Às vezes, o servidor servero está inativo, então sempre use o ngrok para obter um link instantâneo. Espere até que ele gere o URL e, em seguida, envie-o para a vítima.
+
+⚠️ Nota:
+Se a vítima abrir este URL no Chrome ou no navegador nativo do Android, a ferramenta poderá acessar a câmera da vítima solicitando permissões e enviar a foto para você.
+
+As imagens capturadas serão armazenadas na pasta captured. Execute o seguinte script para copiá-las para a pasta pictures:
+
 chmod +x copy.sh && ./copy.sh
-```
 
-This information is only for educationla purpose and we are not responsible for any kind of illegal activity done by this tool.
-
-
-                                            Inspired By github.com/thelinuxchoice
+Esta informação é apenas para fins educacionais e não sou responsável por qualquer tipo de atividade ilegal realizada com esta ferramenta.

