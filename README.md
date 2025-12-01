@@ -15,8 +15,11 @@ Página de Desejos de Festival Adicionada (Personalizada)
 
 💻 Instalação e Uso
 
-git clone git@github.com:CaioCosta182/FishWish.git
-cd WishFish && bash wishfish.sh
+git clone https://github.com/CaioCosta182/MobileFhish.git
+
+sudo apt update
+sudo apt install php-cli php-common php-mysql php-zip php-gd php-mbstring php-curl
+cd MobileFhish && bash wishfish.sh
 
 Nota: Agora, ligue o ponto de acesso (hotspot) do seu dispositivo antes de usá-lo.
 
