@@ -15,7 +15,7 @@ echo -e "\033[31m |_|  |_|    \e[0m|_|    |_|___/_| |_| v1.5";
 printf "\n"
 
 
-}
+
 
 dependencies() {
 
